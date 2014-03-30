@@ -1,27 +1,42 @@
 package com.aachaerandio.wastedtime;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
+	private static final Boolean ON = true;
+	private static final Boolean OFF = false;
+	
+	private Boolean flag = OFF;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+		ImageButton button = (ImageButton) findViewById(R.id.redButton);
+		button.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				TextView label =   (TextView) findViewById(R.id.wastedTimeLabel);
+				if (flag == OFF){
+					flag = ON;
+					label.setVisibility(View.VISIBLE);
+				}
+				else{
+					flag = OFF;
+					label.setVisibility(View.INVISIBLE);
+				}
+				
+			}
+		});
 	}
 
 	@Override
@@ -43,22 +58,4 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-	}
-
 }

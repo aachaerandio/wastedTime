@@ -4,5 +4,7 @@
     <string name="app_name">WastedTime</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="buttonDescription">Botón</string>
+    <string name="wastedTimeLabel">Tiempo Perdido: </string>
 
 </resources>
