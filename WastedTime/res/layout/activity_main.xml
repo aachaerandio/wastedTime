@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainViewFragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,27 +7,53 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.aachaerandio.wastedtime.MainActivity$PlaceholderFragment" >
+    tools:context="com.aachaerandio.wastedtime.MainActivity$PlaceholderFragment" 
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    <ImageButton
-        android:id="@+id/redButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
-        android:layout_marginTop="76dp"
-        android:src="@drawable/red_button"
-        android:contentDescription="@string/buttonDescription" />
+	<ImageButton
+		android:id="@+id/redButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@android:color/transparent"
+		android:layout_marginTop="76dp"
+		android:src="@drawable/red_button"
+		android:contentDescription="@string/buttonDescription"/>  	    
+	
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="192dp"
+	    android:gravity="center_horizontal"
+	    android:keepScreenOn="true"
+	    android:orientation="horizontal"
+	    android:paddingTop="30sp" >
 
-    <TextView
-        android:id="@+id/wastedTimeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/wastedTimeLabel"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+		<TextView
+	        android:id="@+id/wastedTimeLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:visibility="visible"
+	        android:text="@string/wastedTimeLabel"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+		    
+		<Chronometer
+	        android:id="@+id/chronometer"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/chrono" 
+	        android:textSize="20sp"
+	        android:gravity="center_horizontal"
+	        android:paddingTop="30sp"
+/>
+		
+    	</LinearLayout>
 
-</RelativeLayout>
+	<Button
+	    android:id="@+id/btn_stop"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:text="@string/button"
+	    android:textSize="15sp" />
+
+</LinearLayout>

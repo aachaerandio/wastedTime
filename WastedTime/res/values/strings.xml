@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="buttonDescription">Botón</string>
     <string name="wastedTimeLabel">Tiempo Perdido: </string>
+    <string name="chrono">Chronometer</string>
+    <string name="button">Detener</string>
 
 </resources>
