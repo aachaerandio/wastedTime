@@ -14,7 +14,7 @@ public class Chronometer extends TextView{
 	private Timer timer;
     private Context context;
     private long startTime;
-    private long elapsed;
+    private long elapsedTime;
     private static final long DELAYTIME = 0;
     private static final long INTERVALTIME = 1;
      
@@ -38,7 +38,7 @@ public class Chronometer extends TextView{
     public void start() {
         timer = new Timer();
         startTime = System.currentTimeMillis();
-        elapsed = 0L;
+        elapsedTime = 0L;
         timer.scheduleAtFixedRate(new TimerTask() {
              
             @Override
@@ -47,46 +47,8 @@ public class Chronometer extends TextView{
 					
 					@Override
 					public void run() {
-						elapsed = System.currentTimeMillis() - startTime;
-						DecimalFormat df = new DecimalFormat("00");
-				        long hours = 0;
-				        long min = 0;
-				        long sec = 0;
-				        long mill = 0;
-				         
-				        if (elapsed >= 1000) {
-				        	//Calcula las horas que han pasado
-				            hours = elapsed / (3600 * 1000);
-				            //Guarda el resto, menor que 1h	
-				            long remaining = (elapsed % (3600 * 1000));
-				            
-				            //Calcula los minutos que han pasado
-				            min = remaining / (60 * 1000);
-				            //Guarda el resto menor que 1min
-				            remaining = remaining % (60 * 1000);
-				            
-				            //Calcula los seg que han pasado
-				            sec = remaining / 1000;
-				            //Guarda el resto menor que 1 seg
-				            remaining = remaining % (1000);
-				            
-				            //El resto en millis
-				            mill = (elapsed % 1000) / 10;
-				        }
-				        else {
-				        	//El tiempo en millis
-				            mill = (elapsed % 1000) / 10;
-				        }
-
-				        String text = "";
-				        
-				        if (hours > 0) {
-				        	text += df.format(hours) + ":";
-				        }
-				        
-				       	text += df.format(min) + ":";
-				       	text += df.format(sec) + ":";
-				       	text += df.format(mill);
+						elapsedTime = System.currentTimeMillis() - startTime;
+						String text = formatTime(elapsedTime);
 				       	
 				       	Chronometer.this.setText(text);  
 					}
@@ -96,8 +58,55 @@ public class Chronometer extends TextView{
          
     }
     
-    public void stop() {
+    public long getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public void stop() {
     	timer.cancel();
+	}
+
+	public String formatTime(long time) {
+		DecimalFormat df = new DecimalFormat("00");
+		long hours = 0;
+		long min = 0;
+		long sec = 0;
+		long mill = 0;
+		 
+		if (time >= 1000) {
+			//Calcula las horas que han pasado
+		    hours = time / (3600 * 1000);
+		    //Guarda el resto, menor que 1h	
+		    long remaining = (time % (3600 * 1000));
+		    
+		    //Calcula los minutos que han pasado
+		    min = remaining / (60 * 1000);
+		    //Guarda el resto menor que 1min
+		    remaining = remaining % (60 * 1000);
+		    
+		    //Calcula los seg que han pasado
+		    sec = remaining / 1000;
+		    //Guarda el resto menor que 1 seg
+		    remaining = remaining % (1000);
+		    
+		    //El resto en millis
+		    mill = (time % 1000) / 10;
+		}
+		else {
+			//El tiempo en millis
+		    mill = (time % 1000) / 10;
+		}
+
+		String text = "";
+		
+		if (hours > 0) {
+			text += df.format(hours) + ":";
+		}
+		
+		text += df.format(min) + ":";
+		text += df.format(sec) + ":";
+		text += df.format(mill);
+		return text;
 	}
 
         	
