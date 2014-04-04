@@ -9,7 +9,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class Chronometer extends TextView{
+/**
+ * @author Araceli
+ */
+public class Chronometer extends TextView {
 	
 	private Timer timer;
     private Context context;
