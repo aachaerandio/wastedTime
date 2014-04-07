@@ -9,6 +9,8 @@ import com.aachaerandio.wastedtime.ListWastedTime;
 
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
+	
+	final int PAGE_COUNT = 2;
 
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,9 +26,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         case 1:
             // List fragment activity
             return new ListWastedTime();
-        case 2:
+        //case 2:
             // Other fragment activity
-            return new ListWastedTime();
+            //return new ListWastedTime();
         }
  
         return null;
@@ -35,6 +37,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // get item count - equal to number of tabs
-        return 3;
+        return PAGE_COUNT;
     }
 }

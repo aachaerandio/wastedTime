@@ -107,10 +107,24 @@ public class Chronometer extends TextView {
 		}
 		
 		text += df.format(min) + ":";
-		text += df.format(sec) + ":";
+		text += df.format(sec) + ",";
 		text += df.format(mill);
 		return text;
 	}
 
+	public String formatShare (long time) {
+		// 00h:00m:00s
+		DecimalFormat df = new DecimalFormat("00");
+		long hours = (time / 3600000);
+		long min = ((time % 3600000) / 60000);
+		long sec = (((time % 3600000) / 60000) / 1000);
+		//String wastedTime = String.format("%02d:%02d:%02d", elapsedTime / 3600, (elapsedTime % 3600) / 60, (elapsedTime % 60));		
+		String display = "";
+		display += df.format(hours) + "h";
+		display += df.format(min) + "m";
+		display += df.format(sec) + "s";
+		
+		return display;
+	}
         	
 }

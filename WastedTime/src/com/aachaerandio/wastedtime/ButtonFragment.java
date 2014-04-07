@@ -1,10 +1,10 @@
 package com.aachaerandio.wastedtime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +44,14 @@ public class ButtonFragment extends Fragment {
 					chrono.stop();
 					state = OFF;
 					//showPopupMenu(v);
+					
+					Intent intent = new Intent(getActivity(), SaveAndShare.class);
+					
+					intent.putExtra("elapsedTime", String.valueOf(chrono.formatTime(chrono.getElapsedTime())));				
+					//intent.putExtra("elapsedTime", chrono.formatShare(chrono.getElapsedTime()));
+					
+					startActivity(intent);
+					
 				} 
 			}
 		});
