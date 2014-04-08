@@ -60,6 +60,7 @@ public class ButtonFragment extends Fragment {
 		
 	}
 
+	//No se usa
 	public void showPopupMenu(View v) {
 	    PopupMenu popup = new PopupMenu(getActivity(), v);
 	    popup.getMenuInflater().inflate(R.menu.popupmenu, popup.getMenu());
@@ -68,9 +69,7 @@ public class ButtonFragment extends Fragment {
 			   
 			   @Override
 			   public boolean onMenuItemClick(MenuItem item) {
-			    Toast.makeText(getActivity(),
-			      item.toString(),
-			      Toast.LENGTH_LONG).show();
+			    Toast.makeText(getActivity(), item.toString(), Toast.LENGTH_LONG).show();
 			    return true;
 			   }
 			  });
@@ -78,24 +77,5 @@ public class ButtonFragment extends Fragment {
 	}
 	
 	
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
-//		return true;
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
-	
+
 }
