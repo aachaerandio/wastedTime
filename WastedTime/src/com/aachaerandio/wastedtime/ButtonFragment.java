@@ -18,7 +18,7 @@ public class ButtonFragment extends Fragment {
 	private static final String OFF = "inactive";	
 	private com.aachaerandio.wastedtime.components.Chronometer chrono;
 	private String state = OFF;
-	Long memoChrono;
+	private Long memoChrono;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
