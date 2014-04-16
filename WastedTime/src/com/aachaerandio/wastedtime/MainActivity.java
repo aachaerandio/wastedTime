@@ -28,9 +28,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
- 
+        mAdapter = new TabsPagerAdapter(getSupportFragmentManager()); 
         viewPager.setAdapter(mAdapter);
+        
         if (android.os.Build.VERSION.SDK_INT >= 14) {
         	actionBar.setHomeButtonEnabled(false);
         }
@@ -42,7 +42,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                     .setTabListener(this));
         }
 
-        	// When swipe the view see respected tab selected
+        // When swipe the view see respected tab selected
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			
 			@Override
