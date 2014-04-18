@@ -1,11 +1,15 @@
 package com.aachaerandio.wastedtime;
 
-import com.aachaerandio.wastedtime.service.TimeService;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.aachaerandio.wastedtime.service.TimeService;
 
 public class SaveAndShare extends Activity {
 
@@ -19,11 +23,21 @@ public class SaveAndShare extends Activity {
 		
 		setContentView(R.layout.socialmedia);
 
-		TextView text = (TextView) findViewById(R.id.wastedTime);
+		TextView time = (TextView) findViewById(R.id.wastedTime);
+		Button saveBtn = (Button) findViewById(R.id.save);
 
 		Intent intent = getIntent();
-		// intent.getStringExtra("elapsedTime");
-		text.setText(intent.getStringExtra("elapsedTime"));
+		String data = intent.getStringExtra("elapsedTime");
+		time.setText(data);
+		
+		saveBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				EditText text = (EditText) findViewById(R.id.editText);
+				timeService.insert(text.toString());				
+			}
+		});
 	}
 
 }

@@ -22,11 +22,11 @@ public class TimeService {
 	/* (non-Javadoc)
 	 * @see com.aachaerandio.wastedtime.service.ITimeService#insert()
 	 */
-	public void insert() {
+	public void insert(String data) {
 
 		ContentValues values = new ContentValues();
 
-		values.put(DatabaseOpenHelper.COLUMN_NAME, "Times sql 1");
+		values.put(DatabaseOpenHelper.COLUMN_NAME, data);
 		//values.put(DatabaseOpenHelper.COLUMN_NAME_ICON, "Times sql 1");
 		mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
 
