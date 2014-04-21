@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeService;
 
 public class SaveAndShare extends Activity {
@@ -35,7 +36,10 @@ public class SaveAndShare extends Activity {
 			@Override
 			public void onClick(View v) {
 				EditText text = (EditText) findViewById(R.id.editText);
-				timeService.insert(text.toString());				
+				
+				TimeBean timeBean = new TimeBean();
+				timeBean.comment = text.getText().toString();
+				timeService.insert(timeBean);				
 			}
 		});
 	}

@@ -1,5 +1,6 @@
 package com.aachaerandio.wastedtime.service;
 
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -22,17 +23,11 @@ public class TimeService {
 	/* (non-Javadoc)
 	 * @see com.aachaerandio.wastedtime.service.ITimeService#insert()
 	 */
-	public void insert(String data) {
+	public void insert(TimeBean data) {
 
 		ContentValues values = new ContentValues();
 
-		values.put(DatabaseOpenHelper.COLUMN_NAME, data);
-		//values.put(DatabaseOpenHelper.COLUMN_NAME_ICON, "Times sql 1");
-		mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
-
-		values.clear();
-
-		values.put(DatabaseOpenHelper.COLUMN_NAME, "Times sql 2");
+		values.put(DatabaseOpenHelper.COLUMN_NAME, data.comment);
 		mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
 	}
 
