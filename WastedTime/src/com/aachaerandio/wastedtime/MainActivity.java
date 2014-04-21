@@ -84,6 +84,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void goToListFragment(){
+		viewPager.setCurrentItem(1);
+	}
 
 
 //	@Override

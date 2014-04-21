@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.aachaerandio.wastedtime.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -125,6 +127,10 @@ public class Chronometer extends TextView {
 		display += df.format(sec) + "s";
 		
 		return display;
+	}
+
+	public void reset() {
+		setText(getResources().getString(R.string.chrono));
 	}
         	
 }

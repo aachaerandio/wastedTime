@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeService;
+import com.aachaerandio.wastedtime.service.TimeBean.WastedTimeIcon;
 
 public class SaveAndShare extends Activity {
 
@@ -39,7 +40,10 @@ public class SaveAndShare extends Activity {
 				
 				TimeBean timeBean = new TimeBean();
 				timeBean.comment = text.getText().toString();
-				timeService.insert(timeBean);				
+				timeService.insert(timeBean);		
+				
+				setResult(RESULT_OK);     
+				finish();
 			}
 		});
 	}

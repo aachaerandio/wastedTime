@@ -16,6 +16,7 @@ public class ListWastedTime extends ListFragment {
 
 	private SimpleCursorAdapter mAdapter;
 	private TimeService timeService;
+	private Cursor c;
 
 	public ListWastedTime() {
 	}
@@ -33,12 +34,22 @@ public class ListWastedTime extends ListFragment {
 		timeService = new TimeService(this.getActivity());
 
 		// Create a cursor
-		Cursor c = timeService.read();
-		mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.rowlayout,
-				c, DatabaseOpenHelper.columns,
-				new int[] { R.id._id, R.id.label }, 0);
+		readData();
 
 		setListAdapter(mAdapter);
+	}
+
+	private void readData() {
+		c = timeService.read();
+		
+		if (mAdapter == null){
+			mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.rowlayout,
+					c, DatabaseOpenHelper.columns,
+					new int[] { R.id._id, R.id.label }, 0);
+		}
+		else{
+			mAdapter.changeCursor(c);
+		}
 	}
 
 	// Close database
@@ -51,5 +62,13 @@ public class ListWastedTime extends ListFragment {
 	@Override
 	public void onListItemClick(ListView list, View v, int position, long id) {
 		// onListItemClick
+	}
+	
+	@Override
+	public void onResume() {
+		readData();
+		mAdapter.notifyDataSetChanged();
+		
+		super.onResume();
 	}
 }

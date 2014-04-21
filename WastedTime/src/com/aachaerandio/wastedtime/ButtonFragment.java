@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,11 +13,13 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.aachaerandio.wastedtime.components.Chronometer;
+
 public class ButtonFragment extends Fragment {
 
 	private static final String ON = "active";
 	private static final String OFF = "inactive";	
-	private com.aachaerandio.wastedtime.components.Chronometer chrono;
+	private Chronometer chrono;
 	private String state = OFF;
 	private Long memoChrono;
 	
@@ -50,8 +53,7 @@ public class ButtonFragment extends Fragment {
 					intent.putExtra("elapsedTime", String.valueOf(chrono.formatTime(chrono.getElapsedTime())));				
 					//intent.putExtra("elapsedTime", chrono.formatShare(chrono.getElapsedTime()));
 					
-					startActivity(intent);
-					
+					startActivityForResult(intent, 1);
 				} 
 			}
 		});
@@ -59,6 +61,17 @@ public class ButtonFragment extends Fragment {
 		return rootView;
 		
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 1) {
+
+			if (resultCode == MainActivity.RESULT_OK) {
+				((MainActivity) getActivity()).goToListFragment();
+			}
+		}
+	}
+	
 
 	//No se usa
 	public void showPopupMenu(View v) {
@@ -76,6 +89,11 @@ public class ButtonFragment extends Fragment {
 	    popup.show();
 	}
 	
-	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		chrono.reset();
+	}
 
 }

@@ -56,6 +56,5 @@ public class TimeService {
 	 */
 	public void destroy(){
 		mDB.close();
-		mDbHelper.deleteDatabase();
 	}
 }
