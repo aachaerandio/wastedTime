@@ -1,6 +1,9 @@
 package com.aachaerandio.wastedtime.service;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -20,40 +23,30 @@ public class TimeService {
 		mDB = mDbHelper.getWritableDatabase();
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.aachaerandio.wastedtime.service.ITimeService#insert()
-	 */
 	public void insert(TimeBean data) {
 
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		ContentValues values = new ContentValues();
 
-		values.put(DatabaseOpenHelper.COLUMN_NAME, data.comment);
+		values.put(DatabaseOpenHelper.COLUMN_COMMENT, data.getComment());
+		values.put(DatabaseOpenHelper.COLUMN_ICON, data.getIcon().ordinal());
+		values.put(DatabaseOpenHelper.COLUMN_TIME, data.getElapsedTime());
+		values.put(DatabaseOpenHelper.COLUMN_DATE, df.format(new Date()));
 		mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
 	}
 
-	// Returns all artist records in the database
-	/* (non-Javadoc)
-	 * @see com.aachaerandio.wastedtime.service.ITimeService#read()
-	 */
 	public Cursor read() {
 		return mDB.query(DatabaseOpenHelper.TABLE_NAME,
 				DatabaseOpenHelper.columns, null, new String[] {}, null, null,
 				null);
 	}
 	
-	// Delete all records
-	/* (non-Javadoc)
-	 * @see com.aachaerandio.wastedtime.service.ITimeService#clearAll()
-	 */
 	public void clearAll() {
 
 		mDB.delete(DatabaseOpenHelper.TABLE_NAME, null, null);
 
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.aachaerandio.wastedtime.service.ITimeService#destroy()
-	 */
+
 	public void destroy(){
 		mDB.close();
 	}

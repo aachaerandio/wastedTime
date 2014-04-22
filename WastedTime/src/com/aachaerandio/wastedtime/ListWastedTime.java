@@ -45,7 +45,7 @@ public class ListWastedTime extends ListFragment {
 		if (mAdapter == null){
 			mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.rowlayout,
 					c, DatabaseOpenHelper.columns,
-					new int[] { R.id._id, R.id.label }, 0);
+					new int[] { R.id._id, R.id.iconid, R.id.date, R.id.time, R.id.label}, 0);
 		}
 		else{
 			mAdapter.changeCursor(c);

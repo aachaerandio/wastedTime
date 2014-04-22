@@ -46,12 +46,11 @@ public class ButtonFragment extends Fragment {
 					memoChrono = SystemClock.elapsedRealtime();
 					chrono.stop();
 					state = OFF;
-					//showPopupMenu(v);
 					
 					Intent intent = new Intent(getActivity(), SaveAndShare.class);
 					
-					intent.putExtra("elapsedTime", String.valueOf(chrono.formatTime(chrono.getElapsedTime())));				
-					//intent.putExtra("elapsedTime", chrono.formatShare(chrono.getElapsedTime()));
+					intent.putExtra("elapsedTime", chrono.getElapsedTime());					
+					//intent.putExtra("icon", );
 					
 					startActivityForResult(intent, 1);
 				} 
@@ -72,22 +71,6 @@ public class ButtonFragment extends Fragment {
 		}
 	}
 	
-
-	//No se usa
-	public void showPopupMenu(View v) {
-	    PopupMenu popup = new PopupMenu(getActivity(), v);
-	    popup.getMenuInflater().inflate(R.menu.popupmenu, popup.getMenu());
-
-		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-			   
-			   @Override
-			   public boolean onMenuItemClick(MenuItem item) {
-			    Toast.makeText(getActivity(), item.toString(), Toast.LENGTH_LONG).show();
-			    return true;
-			   }
-			  });
-	    popup.show();
-	}
 	
 	@Override
 	public void onResume() {

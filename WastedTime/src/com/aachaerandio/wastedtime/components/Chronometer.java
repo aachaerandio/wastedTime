@@ -71,7 +71,7 @@ public class Chronometer extends TextView {
     	timer.cancel();
 	}
 
-	public String formatTime(long time) {
+	public static String formatTime(long time) {
 		DecimalFormat df = new DecimalFormat("00");
 		long hours = 0;
 		long min = 0;
@@ -114,7 +114,7 @@ public class Chronometer extends TextView {
 		return text;
 	}
 
-	public String formatShare (long time) {
+	public static String formatShare (long time) {
 		// 00h:00m:00s
 		DecimalFormat df = new DecimalFormat("00");
 		long hours = (time / 3600000);
