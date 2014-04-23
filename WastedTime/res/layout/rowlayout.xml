@@ -14,23 +14,23 @@
         android:textSize="24sp" 
         android:visibility="gone"/>
     
-    <TextView
-        android:id="@+id/iconid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:textSize="24sp"/>
-   
-<!--     <ImageView -->
-<!--         android:id="@+id/icon" -->
-<!--         android:layout_width="22dp" -->
-<!--         android:layout_height="22dp" -->
-<!--         android:layout_marginLeft="4dp" -->
+<!--     <TextView -->
+<!--         android:id="@+id/iconid" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_marginLeft="10dp" -->
 <!--         android:layout_marginRight="10dp" -->
-<!--         android:layout_marginTop="4dp"  -->
-<!--         android:contentDescription="image"> -->
-<!--     </ImageView> -->
+<!--         android:textSize="24sp"/> -->
+   
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp" 
+        android:contentDescription="image">
+    </ImageView>
 
     <TextView
         android:id="@+id/date"

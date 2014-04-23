@@ -2,7 +2,10 @@ package com.aachaerandio.wastedtime.service;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import com.aachaerandio.wastedtime.service.TimeBean.WastedTimeIcon;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -35,10 +38,26 @@ public class TimeService {
 		mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
 	}
 
-	public Cursor read() {
-		return mDB.query(DatabaseOpenHelper.TABLE_NAME,
+	public ArrayList<TimeBean> read() {
+		ArrayList<TimeBean> result = new ArrayList<TimeBean>();
+		
+		Cursor c = mDB.query(DatabaseOpenHelper.TABLE_NAME,
 				DatabaseOpenHelper.columns, null, new String[] {}, null, null,
 				null);
+		
+		c.moveToFirst();
+		do{
+			TimeBean item = new TimeBean();
+			item.setId(c.getLong(c.getColumnIndex(DatabaseOpenHelper._ID)));
+			item.setComment(c.getString(c.getColumnIndex(DatabaseOpenHelper.COLUMN_COMMENT)));
+			item.setCreated(new Date(c.getLong(c.getColumnIndex(DatabaseOpenHelper.COLUMN_DATE))));
+			item.setElapsedTime(c.getLong(c.getColumnIndex(DatabaseOpenHelper.COLUMN_TIME)));
+			
+			WastedTimeIcon[] icons = WastedTimeIcon.values();
+			item.setIcon(icons[c.getInt(c.getColumnIndex(DatabaseOpenHelper.COLUMN_ICON))]);
+		}while(c.moveToNext());
+		
+		return result;
 	}
 	
 	public void clearAll() {

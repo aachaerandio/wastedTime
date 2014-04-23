@@ -2,21 +2,34 @@ package com.aachaerandio.wastedtime.service;
 
 import java.util.Date;
 
+import com.aachaerandio.wastedtime.R;
+
 public class TimeBean {
 	
 	public enum WastedTimeIcon {
-		ICON1("R.drawable.red_button"), ICON2("R.drawable.red_button"), ICON3("R.drawable.red_button");
-		public String value;
+		ICON1(R.drawable.red_button), //0
+		ICON2(R.drawable.red_button), //1
+		ICON3(R.drawable.red_button); //2
+		
+		public int id;
 	
-		private WastedTimeIcon(String value) {
-			this.value = value;
+		private WastedTimeIcon(int id) {
+			this.id = id;
 		}
 	};
 	
+	private Long id;
 	private Long elapsedTime; //millis 
 	private WastedTimeIcon icon;
 	private String comment; 
-	private Date insertDate;
+	private Date created;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public Long getElapsedTime() {
 		return elapsedTime;
@@ -36,11 +49,11 @@ public class TimeBean {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public Date getInsertDate() {
-		return insertDate;
+	public Date getCreated() {
+		return created;
 	}
-	public void setInsertDate(Date insertDate) {
-		this.insertDate = insertDate;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 	
 }

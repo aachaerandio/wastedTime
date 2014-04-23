@@ -1,5 +1,7 @@
 package com.aachaerandio.wastedtime;
 
+import java.util.ArrayList;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -9,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import com.aachaerandio.wastedtime.adapter.TimeItemAdapter;
 import com.aachaerandio.wastedtime.service.DatabaseOpenHelper;
+import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeService;
 
 public class ListWastedTime extends ListFragment {
@@ -17,6 +21,8 @@ public class ListWastedTime extends ListFragment {
 	private SimpleCursorAdapter mAdapter;
 	private TimeService timeService;
 	private Cursor c;
+	private ArrayList<TimeBean> timeBeans;
+	private TimeItemAdapter aa;
 
 	public ListWastedTime() {
 	}
@@ -36,20 +42,22 @@ public class ListWastedTime extends ListFragment {
 		// Create a cursor
 		readData();
 
-		setListAdapter(mAdapter);
+		setListAdapter(aa);
 	}
 
 	private void readData() {
-		c = timeService.read();
+		timeBeans = timeService.read();
 		
-		if (mAdapter == null){
-			mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.rowlayout,
-					c, DatabaseOpenHelper.columns,
-					new int[] { R.id._id, R.id.iconid, R.id.date, R.id.time, R.id.label}, 0);
+		if (aa == null){
+			//custom adapter:
+			//array adapter to bind the array to the listview
+			aa = new TimeItemAdapter(getActivity(), R.layout.rowlayout, timeBeans);
 		}
 		else{
-			mAdapter.changeCursor(c);
+			aa.clear();
+			aa.addAll(timeBeans);
 		}
+		
 	}
 
 	// Close database
