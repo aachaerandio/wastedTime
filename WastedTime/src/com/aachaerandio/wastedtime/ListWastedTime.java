@@ -2,27 +2,22 @@ package com.aachaerandio.wastedtime;
 
 import java.util.ArrayList;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import com.aachaerandio.wastedtime.adapter.TimeItemAdapter;
-import com.aachaerandio.wastedtime.service.DatabaseOpenHelper;
 import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeService;
 
 public class ListWastedTime extends ListFragment {
 
-	private SimpleCursorAdapter mAdapter;
 	private TimeService timeService;
-	private Cursor c;
 	private ArrayList<TimeBean> timeBeans;
-	private TimeItemAdapter aa;
+	private TimeItemAdapter mAdapter;
 
 	public ListWastedTime() {
 	}
@@ -42,20 +37,20 @@ public class ListWastedTime extends ListFragment {
 		// Create a cursor
 		readData();
 
-		setListAdapter(aa);
+		setListAdapter(mAdapter);
 	}
 
 	private void readData() {
 		timeBeans = timeService.read();
 		
-		if (aa == null){
+		if (mAdapter == null){
 			//custom adapter:
 			//array adapter to bind the array to the listview
-			aa = new TimeItemAdapter(getActivity(), R.layout.rowlayout, timeBeans);
+			mAdapter = new TimeItemAdapter(getActivity(), R.layout.rowlayout, timeBeans);
 		}
 		else{
-			aa.clear();
-			aa.addAll(timeBeans);
+			mAdapter.clear();
+			mAdapter.addAll(timeBeans);
 		}
 		
 	}

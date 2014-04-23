@@ -1,6 +1,7 @@
 package com.aachaerandio.wastedtime.service;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,19 +46,34 @@ public class TimeService {
 				DatabaseOpenHelper.columns, null, new String[] {}, null, null,
 				null);
 		
-		c.moveToFirst();
-		do{
-			TimeBean item = new TimeBean();
-			item.setId(c.getLong(c.getColumnIndex(DatabaseOpenHelper._ID)));
-			item.setComment(c.getString(c.getColumnIndex(DatabaseOpenHelper.COLUMN_COMMENT)));
-			item.setCreated(new Date(c.getLong(c.getColumnIndex(DatabaseOpenHelper.COLUMN_DATE))));
-			item.setElapsedTime(c.getLong(c.getColumnIndex(DatabaseOpenHelper.COLUMN_TIME)));
-			
-			WastedTimeIcon[] icons = WastedTimeIcon.values();
-			item.setIcon(icons[c.getInt(c.getColumnIndex(DatabaseOpenHelper.COLUMN_ICON))]);
-		}while(c.moveToNext());
+		if (c.getCount() > 0){
+			c.moveToFirst();
+			do{
+				TimeBean item = new TimeBean();
+				item.setId(c.getLong(c.getColumnIndex(DatabaseOpenHelper._ID)));
+				item.setComment(c.getString(c.getColumnIndex(DatabaseOpenHelper.COLUMN_COMMENT)));
+				item.setElapsedTime(c.getLong(c.getColumnIndex(DatabaseOpenHelper.COLUMN_TIME)));
+				item.setCreated(parseDate(c.getString(c.getColumnIndex(DatabaseOpenHelper.COLUMN_DATE))));
+				WastedTimeIcon[] icons = WastedTimeIcon.values();
+				item.setIcon(icons[c.getInt(c.getColumnIndex(DatabaseOpenHelper.COLUMN_ICON))]);
+				
+				result.add(item);
+			}while(c.moveToNext());
+		}
 		
 		return result;
+	}
+	
+	private Date parseDate(String string){
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date d = null;
+		try {
+			d = df.parse(string);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return d;
 	}
 	
 	public void clearAll() {
