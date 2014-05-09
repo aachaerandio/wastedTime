@@ -9,5 +9,25 @@
     <string name="chrono">00:00:00</string>
     <string name="button">Detener</string>
     <string name="share">Share</string>
+    <string name="icon">icon</string>
+    <string name="imageButton1">imageButton1</string>
+    <string name="imageButton2">imageButton2</string>
+    <string name="imageButton3">imageButton3</string>
+    <string name="imageButton4">imageButton4</string>
+    <string name="imageButton5">imageButton5</string>
+    <string name="imageButton6">imageButton6</string>
+    <string name="imageButton7">imageButton7</string>
+    <string name="imageButton8">imageButton8</string>
+    <string name="imageButton9">imageButton9</string>
+    <string name="imageButton10">imageButton10</string>
+    <string name="imageButton11">imageButton11</string>
+    <string name="imageButton12">imageButton12</string>
+    <string name="imageButton13">imageButton13</string>
+    <string name="imageButton14">imageButton14</string>
+    <string name="imageButton15">imageButton15</string>
+    <string name="imageButton16">imageButton16</string>
+    <string name="save">Save</string>
+    <string name="desc">Describe your experience&#8230;</string>
+    <string name="intro">Today you\'ve wasted&#8230;</string>
 
 </resources>

@@ -35,20 +35,20 @@ public class SaveAndShare extends Activity {
 
 		Intent intent = getIntent();
 		final Long data = intent.getLongExtra("elapsedTime", 0L);
+		final Integer icon = intent.getIntExtra("icon", 0);
 		time.setText(Chronometer.formatTime(data));
-		
+		final String image = "ICON" + icon;
 		saveBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				EditText text = (EditText) findViewById(R.id.editText);
 				
-				//getResources().getDrawable(R.drawable.redButton);
 				//WastedTimeIcon.valueOf()
 
 				TimeBean timeBean = new TimeBean();
 				timeBean.setComment(text.getText().toString());
-				timeBean.setIcon(WastedTimeIcon.ICON1);
+				timeBean.setIcon(WastedTimeIcon.valueOf(image));
 				timeBean.setElapsedTime(data);
 				
 				timeService.insert(timeBean);		

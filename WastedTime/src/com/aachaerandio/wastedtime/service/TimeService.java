@@ -44,7 +44,7 @@ public class TimeService {
 		
 		Cursor c = mDB.query(DatabaseOpenHelper.TABLE_NAME,
 				DatabaseOpenHelper.columns, null, new String[] {}, null, null,
-				null);
+				DatabaseOpenHelper._ID +" DESC");
 		
 		if (c.getCount() > 0){
 			c.moveToFirst();

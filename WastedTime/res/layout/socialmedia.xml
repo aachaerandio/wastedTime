@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:layout_margin="8dp"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hoy has perdido..."
+        android:text="@string/intro"
         android:textAppearance="?android:attr/textAppearanceMedium" 
         android:gravity="center"/>
 
@@ -24,8 +26,9 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Describe tu experiencia.." >
+        android:hint="@string/desc" 
+        android:maxLength="140"
+        android:maxLines="3">
 
         <requestFocus />
     </EditText>
@@ -35,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Save" 
+        android:text="@string/save" 
         android:layout_gravity="center"/>
 
     <LinearLayout
@@ -47,19 +50,22 @@
             android:id="@+id/imageButton1"
             android:layout_width="40dip"
             android:layout_height="40dip"
-            android:background="@drawable/socialfb" />
+            android:background="@drawable/socialfb"
+            android:layout_margin="5dp" />
 
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="40dip"
             android:layout_height="40dip"
-            android:background="@drawable/socialgplus" />
+            android:background="@drawable/socialgplus" 
+            android:layout_margin="5dp"/>
 
         <ImageButton
             android:id="@+id/imageButton3"
             android:layout_width="40dip"
             android:layout_height="40dip"
-            android:background="@drawable/socialtwtr" />
+            android:background="@drawable/socialtwtr"
+            android:layout_margin="5dp"/>
 
     </LinearLayout>
 
