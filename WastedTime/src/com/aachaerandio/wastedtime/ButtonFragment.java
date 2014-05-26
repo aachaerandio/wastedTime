@@ -2,31 +2,28 @@ package com.aachaerandio.wastedtime;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.aachaerandio.wastedtime.components.Chronometer;
 import com.aachaerandio.wastedtime.service.TimeBean.WastedTimeIcon;
+import com.aachaerandio.wastedtime.util.Constants;
 
 public class ButtonFragment extends Fragment {
-
+	
 	private static final String ON = "active";
 	private static final String OFF = "inactive";	
 	private Chronometer chrono;
 	private String state = OFF;
-	private Integer icon;
+	private Integer iconId;
 	private View rootView;
 	private ImageButton redButton;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -50,8 +47,8 @@ public class ButtonFragment extends Fragment {
 					
 					Intent intent = new Intent(getActivity(), SaveAndShare.class);
 					
-					intent.putExtra("elapsedTime", chrono.getElapsedTime());					
-					intent.putExtra("icon", icon);
+					intent.putExtra(Constants.ELAPSED_TIME, chrono.getElapsedTime());					
+					intent.putExtra(Constants.ICON, iconId);
 					
 					startActivityForResult(intent, 1);
 				} 
@@ -68,6 +65,12 @@ public class ButtonFragment extends Fragment {
 			imageButton.setOnClickListener(mIconListener);
 		}
 		
+		if(savedInstanceState != null){
+			this.iconId = savedInstanceState.getInt(Constants.ICON);
+			WastedTimeIcon icon = WastedTimeIcon.values()[this.iconId];
+			redButton.setBackgroundDrawable(getResources().getDrawable(icon.id));
+		}
+		
 		return rootView;
 		
 	}
@@ -80,11 +83,18 @@ public class ButtonFragment extends Fragment {
 	    	for (int i = 0; i < iconList.length && icon == null; i++){
 	    		if (iconList[i].associatedBackgroundId == v.getId()){
 	    			icon = iconList[i];
+	    			iconId = icon.ordinal();
 	    		}
 	    	}
 	    	
 	    	redButton.setBackgroundDrawable(getResources().getDrawable(icon.id));
 	    }
+	};
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(Constants.ICON, iconId);
 	};
 	
 	@Override

@@ -1,11 +1,7 @@
 package com.aachaerandio.wastedtime;
 
-import java.io.ByteArrayOutputStream;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +13,7 @@ import com.aachaerandio.wastedtime.components.Chronometer;
 import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeBean.WastedTimeIcon;
 import com.aachaerandio.wastedtime.service.TimeService;
+import com.aachaerandio.wastedtime.util.Constants;
 
 public class SaveAndShare extends Activity {
 
@@ -34,10 +31,10 @@ public class SaveAndShare extends Activity {
 		Button saveBtn = (Button) findViewById(R.id.save);
 
 		Intent intent = getIntent();
-		final Long data = intent.getLongExtra("elapsedTime", 0L);
-		final Integer icon = intent.getIntExtra("icon", 0);
+		final Long data = intent.getLongExtra(Constants.ELAPSED_TIME, 0L);
+		final Integer icon = intent.getIntExtra(Constants.ICON, 0);
 		time.setText(Chronometer.formatTime(data));
-		final String image = "ICON" + icon;
+//		final String image = "ICON" + icon;
 		saveBtn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -48,7 +45,7 @@ public class SaveAndShare extends Activity {
 
 				TimeBean timeBean = new TimeBean();
 				timeBean.setComment(text.getText().toString());
-				timeBean.setIcon(WastedTimeIcon.valueOf(image));
+				timeBean.setIcon(WastedTimeIcon.values()[icon]);
 				timeBean.setElapsedTime(data);
 				
 				timeService.insert(timeBean);		
