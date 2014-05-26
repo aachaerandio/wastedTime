@@ -33,7 +33,7 @@ public class SaveAndShare extends Activity {
 		Intent intent = getIntent();
 		final Long data = intent.getLongExtra(Constants.ELAPSED_TIME, 0L);
 		final Integer icon = intent.getIntExtra(Constants.ICON, 0);
-		time.setText(Chronometer.formatTime(data));
+		time.setText(Chronometer.formatShare(data));
 //		final String image = "ICON" + icon;
 		saveBtn.setOnClickListener(new OnClickListener() {
 			

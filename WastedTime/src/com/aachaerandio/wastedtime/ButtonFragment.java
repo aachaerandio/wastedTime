@@ -19,7 +19,7 @@ public class ButtonFragment extends Fragment {
 	private static final String OFF = "inactive";	
 	private Chronometer chrono;
 	private String state = OFF;
-	private Integer iconId;
+	private Integer iconId = 0;
 	private View rootView;
 	private ImageButton redButton;
 	
@@ -69,6 +69,11 @@ public class ButtonFragment extends Fragment {
 			this.iconId = savedInstanceState.getInt(Constants.ICON);
 			WastedTimeIcon icon = WastedTimeIcon.values()[this.iconId];
 			redButton.setBackgroundDrawable(getResources().getDrawable(icon.id));
+			Long elapsedTime = savedInstanceState.getLong(Constants.ELAPSED_TIME);
+			if (elapsedTime != null && elapsedTime > 0){
+				chrono.start(elapsedTime);
+				state = ON;
+			}
 		}
 		
 		return rootView;
@@ -95,6 +100,10 @@ public class ButtonFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(Constants.ICON, iconId);
+		if (state == ON){
+			chrono.stop();
+			outState.putLong(Constants.ELAPSED_TIME, chrono.getElapsedTime());
+		}
 	};
 	
 	@Override

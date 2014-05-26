@@ -41,9 +41,13 @@ public class Chronometer extends TextView {
     }
         
     public void start() {
+       start(0);
+    }
+    
+    public void start(long startingTime) {
         timer = new Timer();
-        startTime = System.currentTimeMillis();
-        elapsedTime = 0L;
+        startTime = System.currentTimeMillis()-startingTime;
+        elapsedTime = startingTime;
         timer.scheduleAtFixedRate(new TimerTask() {
              
             @Override
@@ -115,18 +119,48 @@ public class Chronometer extends TextView {
 	}
 
 	public static String formatShare (long time) {
-		// 00h:00m:00s
-		DecimalFormat df = new DecimalFormat("00");
-		long hours = (time / 3600000);
-		long min = ((time % 3600000) / 60000);
-		long sec = (((time % 3600000) / 60000) / 1000);
-		//String wastedTime = String.format("%02d:%02d:%02d", elapsedTime / 3600, (elapsedTime % 3600) / 60, (elapsedTime % 60));		
-		String display = "";
-		display += df.format(hours) + "h";
-		display += df.format(min) + "m";
-		display += df.format(sec) + "s";
+		DecimalFormat df = new DecimalFormat("0");
+		long hours = 0;
+		long min = 0;
+		long sec = 0;
+		long mill = 0;
+		 
+		if (time >= 1000) {
+			//Calcula las horas que han pasado
+		    hours = time / (3600 * 1000);
+		    //Guarda el resto, menor que 1h	
+		    long remaining = (time % (3600 * 1000));
+		    
+		    //Calcula los minutos que han pasado
+		    min = remaining / (60 * 1000);
+		    //Guarda el resto menor que 1min
+		    remaining = remaining % (60 * 1000);
+		    
+		    //Calcula los seg que han pasado
+		    sec = remaining / 1000;
+		    //Guarda el resto menor que 1 seg
+		    remaining = remaining % (1000);
+		    
+		    //El resto en millis
+		    mill = (time % 1000) / 10;
+		}
+		else {
+			//El tiempo en millis
+		    mill = (time % 1000) / 10;
+		}
+
+		String text = "";
 		
-		return display;
+		if (hours > 0) {
+			text += df.format(hours) + "h ";
+		}
+
+		if (min > 0) {
+			text += df.format(min) + "m ";
+		}
+		
+		text += df.format(sec) + "s";
+		return text;
 	}
 
 	public void reset() {

@@ -47,7 +47,7 @@ public class TimeItemAdapter extends ArrayAdapter<TimeBean>{
         
         holder.id.setText(String.valueOf(item.getId()));
         holder.icon.setImageResource(item.getIcon().id);
-		holder.time.setText(Chronometer.formatTime(item.getElapsedTime()));
+		holder.time.setText(Chronometer.formatShare(item.getElapsedTime()));
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy");
 		holder.date.setText(df.format(item.getCreated()));
         
