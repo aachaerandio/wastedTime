@@ -55,8 +55,6 @@ public class ButtonFragment extends Fragment {
 			}
 		});
 		
-		//Select an icon
-		//onIconClick();
 		//redButton.setImageDrawable(getResources().getDrawable(WastedTimeIcon.valueOf("ICON"+icon).id));
 		//redButton.setImageResource(WastedTimeIcon.valueOf("ICON"+icon).id);
 		
