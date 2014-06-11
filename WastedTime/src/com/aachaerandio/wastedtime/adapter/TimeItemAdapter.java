@@ -1,7 +1,9 @@
 package com.aachaerandio.wastedtime.adapter;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import com.aachaerandio.wastedtime.R;
 import com.aachaerandio.wastedtime.components.Chronometer;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 
 public class TimeItemAdapter extends ArrayAdapter<TimeBean>{
 
+	private HashMap<Integer, Boolean> mSelection = new HashMap<Integer, Boolean>();
+	
 	public TimeItemAdapter(Context context, int resource, List<TimeBean> objects) {
 		super(context, resource, objects);
 	}
@@ -60,5 +64,30 @@ public class TimeItemAdapter extends ArrayAdapter<TimeBean>{
         TextView time;
         TextView date;
     }
+	
+	
+	 public void setNewSelection(int position, boolean value) {
+         mSelection.put(position, value);
+         notifyDataSetChanged();
+     }
 
+     public boolean isPositionChecked(int position) {
+         Boolean result = mSelection.get(position);
+         return result == null ? false : result;
+     }
+
+     public Set<Integer> getCurrentCheckedPosition() {
+         return mSelection.keySet();
+     }
+
+     public void removeSelection(int position) {
+         mSelection.remove(position);
+         notifyDataSetChanged();
+     }
+
+     public void clearSelection() {
+         mSelection = new HashMap<Integer, Boolean>();
+         notifyDataSetChanged();
+     }
+     
 }

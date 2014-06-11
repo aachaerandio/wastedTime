@@ -76,6 +76,12 @@ public class TimeService {
 		return d;
 	}
 	
+	public void delete(long data) {
+
+		mDB.delete(DatabaseOpenHelper.TABLE_NAME, DatabaseOpenHelper._ID + "=" + data, null);
+
+	}
+	
 	public void clearAll() {
 
 		mDB.delete(DatabaseOpenHelper.TABLE_NAME, null, null);
