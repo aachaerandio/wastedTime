@@ -74,6 +74,27 @@ public class Chronometer extends TextView {
 	public void stop() {
     	timer.cancel();
 	}
+	
+	public void resume() {
+		timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+             
+            @Override
+            public void run() {
+            	 ((Activity) context).runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						elapsedTime = System.currentTimeMillis() - startTime;
+						String text = formatTime(elapsedTime);
+				       	
+				       	Chronometer.this.setText(text);  
+					}
+				});               
+            }
+        }, DELAYTIME, INTERVALTIME);
+	}
+	
 
 	public static String formatTime(long time) {
 		DecimalFormat df = new DecimalFormat("00");

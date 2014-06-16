@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- android:layout_width="match_parent" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:baselineAligned="true" -->
+<!-- android:orientation="horizontal" -->
+<!-- android:background="?android:attr/activatedBackgroundIndicator"> -->
+
+
+<!-- <TextView -->
+<!-- android:id="@+id/_id" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:visibility="gone"/> -->
+
+
+<!-- <ImageView -->
+<!-- android:id="@+id/icon" -->
+<!-- android:contentDescription="@string/icon" -->
+<!-- android:layout_width="45dp" -->
+<!-- android:layout_height="45dp" -->
+<!-- android:layout_marginLeft="4dp" -->
+<!-- android:layout_marginRight="10dp" -->
+<!-- android:layout_marginTop="4dp" -->
+<!-- android:layout_marginBottom="4dp" -->
+<!-- android:scaleType="centerCrop"> -->
+<!-- </ImageView> -->
+
+
+<!-- <TextView -->
+<!-- android:id="@+id/date" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:textSize="20sp" -->
+<!-- android:layout_marginLeft="10dp" -->
+<!-- android:layout_marginRight="10dp" -->
+<!-- android:layout_marginTop="8dp"> -->
+<!-- </TextView> -->
+
+
+<!-- <TextView -->
+<!-- android:id="@+id/time" -->
+<!-- android:layout_width="wrap_content" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:textSize="20sp" -->
+<!-- android:layout_marginLeft="10dp" -->
+<!-- android:layout_marginRight="10dp" -->
+<!-- android:layout_marginTop="8dp"> -->
+<!-- </TextView> -->
+  
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="6dp"
+    android:shrinkColumns="1"
+    android:stretchColumns="1" >
+
+<!--     Table 1: Row 1 -->
+    <TableRow>
+
+<!--         Table 1: Row 1: Column 1: (icon) -->
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="3dp"
+            android:contentDescription="@string/icon"
+            android:scaleType="centerCrop" >
+        </ImageView>
+
+<!--         Table 1: Row 1: Column 2: (Table 2) -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shrinkColumns="0"
+            android:stretchColumns="0" >
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/_id"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone" />
+                
+<!--                 Table 2: Row 1: Column 1: (comment) -->
+                <TextView
+                    android:id="@+id/comment"
+                    style="@style/TextMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
+                
+<!--                 Table 2: Row 1: Column 2: (date) -->
+                <TextView
+                    android:id="@+id/date"
+                    style="@style/ListItemDate" />
+            </TableRow>
+
+            <TableRow>
+			<!-- Table 2: Row 2: Column 1: (time) -->
+                <TextView
+                    android:id="@+id/time"
+                    style="@style/TextMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="8dp" />
+                
+<!--                 Table 2: Row 2: Column 2: (datetime) -->
+                <TextView
+                    android:id="@+id/datetime"
+                    style="@style/ListItemDate" />
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+</TableLayout>
+<!-- </LinearLayout> -->

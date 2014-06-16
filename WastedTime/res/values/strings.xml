@@ -29,5 +29,8 @@
     <string name="save">Save</string>
     <string name="desc">Describe your experience&#8230;</string>
     <string name="intro">Today you\'ve wasted&#8230;</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
 
 </resources>

@@ -12,10 +12,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.aachaerandio.wastedtime.R.menu;
 import com.aachaerandio.wastedtime.adapter.TimeItemAdapter;
 import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeService;
@@ -25,6 +28,7 @@ public class ListWastedTime extends ListFragment {
 	private TimeService timeService;
 	private ArrayList<TimeBean> timeBeans;
 	private TimeItemAdapter mAdapter;
+	private ActionMode mActionMode;
 
 	public ListWastedTime() {
 	}
@@ -46,8 +50,12 @@ public class ListWastedTime extends ListFragment {
 
 		setListAdapter(mAdapter);
 		
+		
+		
+		final ListView listView = getListView();
+		
 		// Enabling batch contextual actions
-		ListView listView = getListView();
+		//ListView listView = getListView();
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 			
@@ -56,8 +64,7 @@ public class ListWastedTime extends ListFragment {
 		    @Override
 		    public void onItemCheckedStateChanged(ActionMode mode, int position,
 		                                          long id, boolean checked) {
-		        // Here you can do something when items are selected/de-selected,
-		        // such as update the title in the CAB
+		        // When items are selected/de-selected, such as update the title in the CAB
 		    	if (checked) {
 		    		nSelected++;
                     mAdapter.setNewSelection(position, checked);                   
@@ -66,6 +73,7 @@ public class ListWastedTime extends ListFragment {
                     mAdapter.removeSelection(position);                
                 }
                 mode.setTitle(nSelected + " selected");
+		    	mode.invalidate();
 		    }
 
 		    @Override
@@ -73,19 +81,13 @@ public class ListWastedTime extends ListFragment {
 		        // Respond to clicks on the actions in the CAB
 		        switch (item.getItemId()) {
 		            case R.id.menu_delete:
+		                deleteSelectedItems();
+		                mode.finish(); // Action picked, so close the CAB
+		                return true;
+		            case R.id.menu_share:
+		            	Toast.makeText(getActivity(), "Shared!", Toast.LENGTH_SHORT).show();
 		            	nSelected = 0;
-		                //deleteSelectedItems();
-		            	Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
-		            	List<TimeBean> selectedItems = new ArrayList<TimeBean>();
-		            	for (Integer pos : positions) {
-		            		selectedItems.add(mAdapter.getItem(pos));
-		            	}
-		            	for (TimeBean timeBean: selectedItems) {
-		            		timeService.delete(timeBean.getId());
-		            		mAdapter.remove(timeBean);
-		            	}
-	            		mAdapter.notifyDataSetChanged();
-		                mAdapter.clearSelection();
+		            	mAdapter.clearSelection();
 		                mode.finish(); // Action picked, so close the CAB
 		                return true;
 		            default:
@@ -93,9 +95,10 @@ public class ListWastedTime extends ListFragment {
 		        }
 		    }
 
-		    @Override
+			@Override
 		    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 		        // Inflate the menu for the CAB
+				nSelected = 0;
 		        MenuInflater inflater = mode.getMenuInflater();
 		        inflater.inflate(R.menu.contextual_menu, menu);
 		        return true;
@@ -104,15 +107,47 @@ public class ListWastedTime extends ListFragment {
 		    @Override
 		    public void onDestroyActionMode(ActionMode mode) {
 		        // When the CAB is removed. By default, selected items are deselected/unchecked.
+		    	mAdapter.clearSelection();
 		    }
 
 		    @Override
 		    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
 		        // Perform updates to the CAB due to an invalidate() request
-		        return false;
+				// Enabling share
+		    	boolean isSingleSelection = mAdapter.getCurrentCheckedPosition().size() == 1;
+		    	menu.findItem(R.id.menu_share).setVisible(isSingleSelection);
+		    	
+		        return true;
 		    }
+		    
+		    
+		    private void deleteSelectedItems() {
+		    	nSelected = 0;
+            	Set<Integer> positions = mAdapter.getCurrentCheckedPosition();
+            	List<TimeBean> selectedItems = new ArrayList<TimeBean>();
+            	for (Integer pos : positions) {
+            		selectedItems.add(mAdapter.getItem(pos));
+            	}
+            	for (TimeBean timeBean: selectedItems) {
+            		timeService.delete(timeBean.getId());
+            		mAdapter.remove(timeBean);
+            	}
+        		mAdapter.notifyDataSetChanged();
+                mAdapter.clearSelection();
+			}
+		    
 		});
 		
+		
+//		getListView().setOnLongClickListener(new OnLongClickListener() {
+//			
+//			@Override
+//			public boolean onLongClick(View v) {
+//				getListView().setItemChecked(getSelectedItemPosition(),!mAdapter.isPositionChecked(getSelectedItemPosition()));
+//				return false;
+//			}
+//		});
+	
 	}
 
 	private void readData() {

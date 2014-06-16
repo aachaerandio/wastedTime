@@ -118,8 +118,10 @@ public class ButtonFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
-		chrono.reset();
+		if (state == ON){
+			chrono.resume();
+		}
 	}
+	
 
 }

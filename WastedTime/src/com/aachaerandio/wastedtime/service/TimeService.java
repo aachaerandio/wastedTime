@@ -18,6 +18,7 @@ public class TimeService {
 
 	private SQLiteDatabase mDB = null;
 	private DatabaseOpenHelper mDbHelper;
+	private final SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	
 	public TimeService(Activity activity) {
 		// Create a new DatabaseHelper
@@ -29,13 +30,12 @@ public class TimeService {
 	
 	public void insert(TimeBean data) {
 
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		ContentValues values = new ContentValues();
 
 		values.put(DatabaseOpenHelper.COLUMN_COMMENT, data.getComment());
 		values.put(DatabaseOpenHelper.COLUMN_ICON, data.getIcon().ordinal());
 		values.put(DatabaseOpenHelper.COLUMN_TIME, data.getElapsedTime());
-		values.put(DatabaseOpenHelper.COLUMN_DATE, df.format(new Date()));
+		values.put(DatabaseOpenHelper.COLUMN_DATE, DATETIME_FORMAT.format(new Date()));
 		mDB.insert(DatabaseOpenHelper.TABLE_NAME, null, values);
 	}
 
@@ -65,10 +65,10 @@ public class TimeService {
 	}
 	
 	private Date parseDate(String string){
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		
 		Date d = null;
 		try {
-			d = df.parse(string);
+			d = DATETIME_FORMAT.parse(string);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

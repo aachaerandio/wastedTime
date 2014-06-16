@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +41,9 @@ public class TimeItemAdapter extends ArrayAdapter<TimeBean>{
             holder.id = (TextView)view.findViewById(R.id._id);
             holder.icon = (ImageView)view.findViewById(R.id.icon);
     		holder.time = (TextView)view.findViewById(R.id.time);
-    		holder.date = (TextView)view.findViewById(R.id.date);            
+    		holder.comment = (TextView)view.findViewById(R.id.comment);
+    		holder.date = (TextView)view.findViewById(R.id.date); 
+    		holder.datetime = (TextView)view.findViewById(R.id.datetime); 
             view.setTag(holder);
             
         } else {
@@ -52,18 +55,15 @@ public class TimeItemAdapter extends ArrayAdapter<TimeBean>{
         holder.id.setText(String.valueOf(item.getId()));
         holder.icon.setImageResource(item.getIcon().id);
 		holder.time.setText(Chronometer.formatShare(item.getElapsedTime()));
+		holder.comment.setText(item.getComment());
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy");
 		holder.date.setText(df.format(item.getCreated()));
+		SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
+		holder.datetime.setText(tf.format(item.getCreated()));
         
         return view;
 	}
 	
-	static class ViewHolder {  
-        TextView id;  
-        ImageView icon;  
-        TextView time;
-        TextView date;
-    }
 	
 	
 	 public void setNewSelection(int position, boolean value) {
@@ -89,5 +89,15 @@ public class TimeItemAdapter extends ArrayAdapter<TimeBean>{
          mSelection = new HashMap<Integer, Boolean>();
          notifyDataSetChanged();
      }
+     
+     
+ 	static class ViewHolder {  
+        TextView id;  
+        ImageView icon;  
+        TextView time;
+        TextView date;
+        TextView datetime;
+        TextView comment;
+    }
      
 }

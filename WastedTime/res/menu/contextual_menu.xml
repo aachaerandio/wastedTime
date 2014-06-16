@@ -5,7 +5,7 @@
         android:id="@+id/menu_delete"
         android:icon="@android:drawable/ic_menu_delete"
         android:showAsAction="ifRoom|withText"
-        android:title="Delete"
+        android:title="@string/menu_delete"
         android:titleCondensed="Delete">
     </item>
     
@@ -13,8 +13,15 @@
         android:id="@+id/menu_edit"
         android:icon="@android:drawable/ic_menu_edit"
         android:showAsAction="ifRoom|withText"
-        android:title="Edit"
+        android:title="@string/menu_edit"
         android:titleCondensed="Edit">
     </item>
+    
+	<item
+	    android:id="@+id/menu_share"
+	    android:icon="@drawable/ic_menu_share"
+	    android:showAsAction="ifRoom"
+	    android:title="@string/menu_share">
+	</item>
  
 </menu>
