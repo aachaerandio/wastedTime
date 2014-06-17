@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.aachaerandio.wastedtime.R.menu;
 import com.aachaerandio.wastedtime.adapter.TimeItemAdapter;
 import com.aachaerandio.wastedtime.service.TimeBean;
 import com.aachaerandio.wastedtime.service.TimeService;
@@ -60,6 +61,7 @@ public class ListWastedTime extends ListFragment {
 		listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 			
 			private int nSelected = 0;
+			private ShareActionProvider mShareActionProvider;
 
 		    @Override
 		    public void onItemCheckedStateChanged(ActionMode mode, int position,
@@ -87,6 +89,7 @@ public class ListWastedTime extends ListFragment {
 		            case R.id.menu_share:
 		            	Toast.makeText(getActivity(), "Shared!", Toast.LENGTH_SHORT).show();
 		            	nSelected = 0;
+		            	mShareActionProvider .setShareIntent(getDefaultIntent());
 		            	mAdapter.clearSelection();
 		                mode.finish(); // Action picked, so close the CAB
 		                return true;
@@ -101,8 +104,19 @@ public class ListWastedTime extends ListFragment {
 				nSelected = 0;
 		        MenuInflater inflater = mode.getMenuInflater();
 		        inflater.inflate(R.menu.contextual_menu, menu);
+		        
+		        final MenuItem shareItem = menu.findItem(R.id.menu_share);
+		        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+		        //mShareActionProvider.setShareIntent(getDefaultIntent());
+		        
 		        return true;
 		    }
+			
+			private Intent getDefaultIntent() {
+			    Intent intent = new Intent(Intent.ACTION_SEND);
+			    intent.setType("text/plain");
+			    return intent;
+			}
 
 		    @Override
 		    public void onDestroyActionMode(ActionMode mode) {
