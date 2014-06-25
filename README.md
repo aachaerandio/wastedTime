@@ -1,6 +1,6 @@
-[Wasted Time]
+#Wasted Time
 ==========
-## Index
+##Index
 
 #Summary 
 
