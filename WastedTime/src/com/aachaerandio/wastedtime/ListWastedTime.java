@@ -75,6 +75,8 @@ public class ListWastedTime extends ListFragment {
                     mAdapter.removeSelection(position);                
                 }
                 mode.setTitle(nSelected + " selected");
+                
+                // invalidate the CAB to be able to hide and show menu items
 		    	mode.invalidate();
 		    }
 
@@ -89,7 +91,7 @@ public class ListWastedTime extends ListFragment {
 		            case R.id.menu_share:
 		            	Toast.makeText(getActivity(), "Shared!", Toast.LENGTH_SHORT).show();
 		            	nSelected = 0;
-		            	mShareActionProvider .setShareIntent(getDefaultIntent());
+		            	shareSelectedItem();
 		            	mAdapter.clearSelection();
 		                mode.finish(); // Action picked, so close the CAB
 		                return true;
@@ -98,6 +100,17 @@ public class ListWastedTime extends ListFragment {
 		        }
 		    }
 
+			private void shareSelectedItem() {
+				Intent tweetIntent = new Intent(Intent.ACTION_SEND);
+				//mAdapter.getItem(listView.getSelectedItemPosition());
+				String shareText="prueba"; //= time.getText().toString() +" wasted "+ text.getText().toString();
+				shareText += " #wastedTimeApp"; 
+				tweetIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+				tweetIntent.setType("text/plain");
+				startActivity(Intent.createChooser(tweetIntent, "Choose"));
+				
+			}
+
 			@Override
 		    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 		        // Inflate the menu for the CAB
@@ -105,18 +118,26 @@ public class ListWastedTime extends ListFragment {
 		        MenuInflater inflater = mode.getMenuInflater();
 		        inflater.inflate(R.menu.contextual_menu, menu);
 		        
-		        final MenuItem shareItem = menu.findItem(R.id.menu_share);
-		        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-		        //mShareActionProvider.setShareIntent(getDefaultIntent());
+//		        final MenuItem shareItem = menu.findItem(R.id.menu_share);
+//		        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+//		        mShareActionProvider.setShareIntent(getDefaultIntent());
 		        
 		        return true;
 		    }
 			
-			private Intent getDefaultIntent() {
-			    Intent intent = new Intent(Intent.ACTION_SEND);
-			    intent.setType("text/plain");
-			    return intent;
-			}
+//			private Intent getDefaultIntent() {
+//			    Intent intent = new Intent(Intent.ACTION_SEND);
+//			    intent.putExtra(Intent.EXTRA_TEXT, "This is a message for you");
+//			    intent.setType("text/plain");
+//			    return intent;
+//			}
+//			
+//			private void doShare() {
+//			    Intent intent = new Intent(Intent.ACTION_SEND);
+//			    intent.setType("text/plain");
+//			    intent.putExtra(Intent.EXTRA_TEXT, "This is a message for you");
+//			    mShareActionProvider.setShareIntent(intent);
+//			}
 
 		    @Override
 		    public void onDestroyActionMode(ActionMode mode) {

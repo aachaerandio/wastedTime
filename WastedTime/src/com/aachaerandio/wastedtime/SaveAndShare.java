@@ -57,20 +57,6 @@ public class SaveAndShare extends Activity {
 			}
 		});
 
-		// Prueba twitter
-		ImageButton smt = (ImageButton) findViewById(R.id.socialmedia1);
-		smt.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent tweetIntent = new Intent(Intent.ACTION_SEND);
-				String shareText = time.getText().toString() +" wasted "+ text.getText().toString();
-				shareText += " #wastedTimeApp"; 
-				tweetIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-				tweetIntent.setType("text/plain");
-				startActivity(Intent.createChooser(tweetIntent, "Choose"));
-			}
-		});
 
 /*		LinearLayout linearbar = (LinearLayout) findViewById(R.id.linearbar);
 		// Create SocialAuthAdapter object

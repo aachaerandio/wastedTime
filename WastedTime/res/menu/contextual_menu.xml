@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+     xmlns:myapp="http://schemas.android.com/apk/res-auto">
  
     <item
         android:id="@+id/menu_delete"
@@ -20,9 +21,9 @@
 	<item
 	    android:id="@+id/menu_share"
 	    android:icon="@drawable/ic_menu_share"
-	    android:showAsAction="ifRoom"
-	    android:title="@string/menu_share">
-<!-- 	    android:actionProviderClass="android.support.v7.widget.ShareActionProvider"> -->
+	    android:title="@string/menu_share"
+	    myapp:showAsAction="ifRoom"
+	    myapp:actionProviderClass="android.support.v7.widget.ShareActionProvider">
 	</item>
  
 </menu>

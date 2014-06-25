@@ -32,5 +32,6 @@
     <string name="menu_share">Share</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
+    <string name="overflow">overflow</string>
 
 </resources>

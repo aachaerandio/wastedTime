@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="?android:attr/activatedBackgroundIndicator">
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:baselineAligned="false">
     
     <LinearLayout android:id="@+id/icon_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp">
+        android:padding="3dp"
+        android:layout_weight="0">
 	    <ImageView
 		     android:id="@+id/icon"
 		     android:layout_width="45dp"
@@ -26,7 +28,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1">
     
 	    <LinearLayout android:id="@+id/time_layout"
 	        android:layout_width="match_parent"
@@ -87,5 +90,6 @@
 		         android:gravity="right"
 		         android:layout_weight="0"/> 
 		</LinearLayout>
-	</LinearLayout>    
+	</LinearLayout>
+    
 </LinearLayout>
