@@ -3,7 +3,7 @@ WastedTime
 
 Autor: Araceli Achaerandio (<https://www.linkedin.com/pub/araceli-achaerandio/34/42b/292>)
 
-WastedTime is an app aims to help you realise how much time you waste in some situations. 
+WastedTime is an app that aims to help you realise how much time you waste in some situations. 
 
 You will have a chronometer and a list of your tracks, so you can check your times and have the ability to share them on your favourite social networks. 
 
@@ -24,6 +24,8 @@ This is my first app for android but not the last, hope you enjoy using it as mu
 ![Screenshot](https://raw.github.com/aachaerandio/WastedTime/develop/screenshots/006.png)
 
 **Version**
+
+**v0.1-beta**
 
 This project is under development. Some functions still pending are customize the UI, optimize layouts, complete share and edit options, translate texts and code comments, use of javadoc... and publish in Google Play.
 
